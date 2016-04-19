@@ -1,0 +1,111 @@
+
+2.2 4.1.2 5.0 6.0
+
+命令行查看天气预报
+curl wttr.in
+
+#!/bin/sh
+launchctl unload /System/Library/LaunchDaemons/com.apple.nsurlstoraged.plist
+launchctl unload /System/Library/LaunchAgents/com.apple.nsurlsessiond.plist
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.nsurlsessiond.plist
+sudo launchctl unload /System/Library/LaunchDaemons/com.apple.nsurlstoraged.plist
+
+
+finder，点击（前往），点击（电脑），点击你的苹果盘，>资源库>Preferences>SystenConfiguration，进去后，把里面全部的文件全部删掉！（相当于清空你的网络设置），然后重启电脑，你就可以正常的打开网络偏好设置了。
+
+
+XAMPP for MAC 安装后MYSQL不能正常启动的解决办法
+
+1、打开/Applications/XAMPP/xamppfiles/xampp进行编辑
+
+2、找到这一行：$XAMPP_ROOT/bin/mysql.server start > /dev/null &
+
+3、添加如下一行在找到的那一行上面：unset DYLD_LIBRARY_PATH，结果如下：
+
+unset DYLD_LIBRARY_PATH
+
+$XAMPP_ROOT/bin/mysql.server start > /dev/null &
+
+然后即可启动mysql
+
+
+
+安装PHP
+curl -s http://php-osx.liip.ch/install.sh | bash -s 5.6
+
+
+当Apache web server stopped 时，
+系统的Apache服务占用了相应的端口  在终端下 sudo apachectl stop
+
+navicat 连接MySQL本地数据库
+advanced 设置里面
+use socket file:  /Applications/XAMPP/xamppfiles/var/mysql/mysql.sock
+
+
+
+Google Public DNS 8.8.8.8  8.8.4.4   		把网络全部换成这个DNS就可以了
+百度DNS	
+常用DNS服务器地址
+http://www.williamlong.info/archives/3939.html
+
+
+Wordpress 字体调用函数 删掉
+
+默认主题twentyfourteen还会从谷歌调用字体，前台也会变得卡，解决办法是更换其它主题，或者手动将wp-content/themes/twentyfourteen/functions.php中调用谷歌字体的函数function twentyfourteen_font_url()删掉即可
+
+function twentyfifteen_fonts_url() {
+	$fonts_url = '';
+	$fonts     = array();
+	$subsets   = 'latin,latin-ext';
+
+	/*
+	 * Translators: If there are characters in your language that are not supported
+	 * by Noto Sans, translate this to 'off'. Do not translate into your own language.
+	 */
+	if ( 'off' !== _x( 'on', 'Noto Sans font: on or off', 'twentyfifteen' ) ) {
+		$fonts[] = 'Noto Sans:400italic,700italic,400,700';
+	}
+
+	/*
+	 * Translators: If there are characters in your language that are not supported
+	 * by Noto Serif, translate this to 'off'. Do not translate into your own language.
+	 */
+	if ( 'off' !== _x( 'on', 'Noto Serif font: on or off', 'twentyfifteen' ) ) {
+		$fonts[] = 'Noto Serif:400italic,700italic,400,700';
+	}
+
+	/*
+	 * Translators: If there are characters in your language that are not supported
+	 * by Inconsolata, translate this to 'off'. Do not translate into your own language.
+	 */
+	if ( 'off' !== _x( 'on', 'Inconsolata font: on or off', 'twentyfifteen' ) ) {
+		$fonts[] = 'Inconsolata:400,700';
+	}
+
+	/*
+	 * Translators: To add an additional character subset specific to your language,
+	 * translate this to 'greek', 'cyrillic', 'devanagari' or 'vietnamese'. Do not translate into your own language.
+	 */
+	$subset = _x( 'no-subset', 'Add new subset (greek, cyrillic, devanagari, vietnamese)', 'twentyfifteen' );
+
+	if ( 'cyrillic' == $subset ) {
+		$subsets .= ',cyrillic,cyrillic-ext';
+	} elseif ( 'greek' == $subset ) {
+		$subsets .= ',greek,greek-ext';
+	} elseif ( 'devanagari' == $subset ) {
+		$subsets .= ',devanagari';
+	} elseif ( 'vietnamese' == $subset ) {
+		$subsets .= ',vietnamese';
+	}
+
+	if ( $fonts ) {
+		$fonts_url = add_query_arg( array(
+			'family' => urlencode( implode( '|', $fonts ) ),
+			'subset' => urlencode( $subsets ),
+		), 'https://fonts.googleapis.com/css' );
+	}
+
+	return $fonts_url;
+}
+
+D8:5D:4C:69:E7:1F
